@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace WordCounter.Models
 {
@@ -19,25 +19,25 @@ namespace WordCounter.Models
 
         public void Dissect()
         {
-            char[] Stripped;
+            char[] TempCharray;
+            List<char> stripped = new List<char>();
             Dissected = Sentence.Split(" ");
+            Sentence = "";
             for (int o = 0; Dissected.Length > o; o++)
             {
-                Stripped = Dissected[o].ToCharArray();
-                for (int i = 0; Stripped.Length > i; i++)
+                TempCharray = Dissected[o].ToCharArray();
+                for (int i = 0; TempCharray.Length > i; i++)
                 {
-                    if (Stripped[i] == '!' || Stripped[i] == '.' || Stripped[i] == ',')
+                    if ( Char.IsLetter(TempCharray[i]))
                     {
-                        Stripped[i] = ' ';
-                        Console.WriteLine(Stripped);
+                        Sentence += TempCharray[i];
+                        
                     }
-                Console.WriteLine(Stripped);
-                }
-                Dissected[o] = String.Join(' ', Stripped.ToString());;
+                }   
+                Sentence += " ";
+                stripped = new List<char>();
+
             }
-            
-            Sentence = String.Join(' ', Dissected.ToString());
-            String.Join(' ', Sentence);
             Console.WriteLine(Sentence);
         }
         public void Count(string mode)
@@ -51,10 +51,9 @@ namespace WordCounter.Models
                     Amount++;
                 }
             }
-
             else if (mode == "word-in-sentence")
             {
-
+                Dissected = Sentence.Split(" ");
                 foreach (string part in Dissected)
                 {
                     if (part == Word)

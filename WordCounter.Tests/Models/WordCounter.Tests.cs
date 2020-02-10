@@ -7,7 +7,7 @@ namespace WordCounter.Tests
     public class WordCounterTests
     {
         [TestMethod]
-       public void Word_Counts_Word()
+        public void Word_Counts_Word()
         {
             Counter testcounter = new Counter("yeah", "yeah");
             testcounter.Dissect();
@@ -17,12 +17,11 @@ namespace WordCounter.Tests
         [TestMethod]
         public void Word_Counts_Sentence()
         {
-            
             Counter testcounter = new Counter("yeah", "yeah, I like to dance, yeah");
             testcounter.Dissect();
             testcounter.Count("word-in-sentence");
             Assert.AreEqual(2, testcounter.Amount);
         }
-        
+
     }
 }
